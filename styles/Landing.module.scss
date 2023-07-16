@@ -1,0 +1,146 @@
+.landingwrap {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  // justify-content: center;
+}
+
+.header {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin: 3rem 0 6rem 0;
+  pointer-events: all;
+
+  > header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+
+    > h1 {
+      font-size: 7em;
+      color: skyblue;
+    }
+  }
+}
+
+.actlist {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+
+}
+
+.beatlist {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.actrow {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 1rem 0;
+  border: 1px solid skyblue;
+  flex-shrink: .25;
+  height: 56px;
+  margin: 0 1rem;
+  padding: 0 1rem;
+  background-color: #DFBD69;
+  filter: drop-shadow(1.5px -1px 1.5px #EDC967);
+  cursor: pointer;
+  transition: all cubic-bezier(.45,.23,.35,.93) .3s;
+  transform-origin: left;
+  scale: 1;
+
+  &:hover {
+    scale: 1.11;
+    margin-right: 2.825rem;
+    border: 2px solid white;
+
+    .actTitle {
+      color: white;
+    }
+
+    & + .actrow {
+
+    }
+  }
+
+  &:first-child {
+    border-radius: 4px 0 0 4px;
+  }
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+.beatitem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 25px;
+  height: 20px;
+  box-sizing: border-box;
+  margin-right: .25rem;
+}
+
+.beatmeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 25px;
+  height: 20px;
+  box-sizing: border-box;
+  
+  > img {
+    display: flex;
+  }
+
+  span {
+    position: absolute;
+    bottom: .25rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    // width: 225px;
+    // padding: 0 .5rem;
+  }
+}
+
+.actId {
+  position: absolute;
+  font-size: .825em;
+  top: -0.25rem;
+  left: .10rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: grey;
+  opacity: .4;
+}
+
+.actTitle {
+  white-space: nowrap;
+  margin-right: 1rem;
+  font-size: 1.25em;
+  color: #AE8625;
+}

@@ -1,0 +1,43 @@
+.container {
+  padding: 3rem 1rem 0;
+  overflow: hidden;
+}
+
+.navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  background-color: transparent;
+  z-index: 999;
+  padding-right: 1.825rem;
+}
+
+.navheader {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+
+  > ul > li > details > summary::after {
+    display: none !important;
+  }
+}
+
+.iconwrap {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  &:last-child {
+    img {
+      transform: rotate(45deg);
+      filter: invert(57%) sepia(72%) saturate(327%) hue-rotate(358deg) brightness(101%) contrast(99%);
+    }
+  }
+}
