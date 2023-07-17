@@ -86,26 +86,26 @@
     display: flex;
   }
 
-  span {
-    position: absolute;
-    bottom: .25rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    // width: 225px;
-    // padding: 0 .5rem;
-  }
+  // span {
+  //   position: absolute;
+  //   bottom: .25rem;
+  //   white-space: nowrap;
+  //   text-overflow: ellipsis;
+  //   overflow: hidden;
+  //   // width: 225px;
+  //   // padding: 0 .5rem;
+  // }
 }
 
 .iconWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25px;
-  height: 25px;
+  width: .97rem;
+  // height: 25px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: .2rem;
+  right: .2rem;
   z-index: 3;
   cursor: pointer;
 
@@ -124,11 +124,43 @@
 }
 
 .beatName {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1em;
+  color: white;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid white;
+  padding-bottom: .5rem;
+
+  > svg {
+    margin-right: .5rem;
+    width: .97rem;
+
+    :hover {
+      color: #EDC967;
+      cursor: pointer;
+    }
+  }
+
+}
+
+.beatDuration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: .75em;
   color: white;
 }
 
 .beatCaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-overflow: ellipsis;
   overflow: hidden;
   margin-right: 1rem;

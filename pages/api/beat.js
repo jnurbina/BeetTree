@@ -99,6 +99,38 @@ export const postNewBeat = async (updateSelectedActBeats, selectedAct) => {
   }
 }
 
+export const editBeat = async (updateSelectedActBeats, selectedAct, payload) => {
+  const url = `http://localhost:8080/acts/beats/${payload.id}`;
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  };
+
+  try {
+    const response = await fetch(url, requestOptions);
+    // const data = await response.json();
+
+    // console.log('edited beat:', data);
+
+    const beatData = await getSelectedActBeats(selectedAct.id);
+    const { beats } = beatData;
+
+    console.log('do we see the edited beats', beats);
+    console.log('does beats include the payload?', beats.includes(payload));
+
+    if (Array.isArray(beats)) {
+      if (beats.some(beat => beat.id === payload.id)) {
+        updateSelectedActBeats(beats);
+      } else {
+        throw Error(`New Data: ${beats} didnt receive PUT payload: ${payload}`);
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const delBeatFromSelectedAct = async (updateSelectedActBeats, selectedAct, beatItem) => {
   const requestOptions = {
     method: 'DELETE',

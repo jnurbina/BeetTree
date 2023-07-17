@@ -1,24 +1,31 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { shallow } from 'zustand/shallow'
 import useActsStore from '../../store/store';
-import { delSelectedAct, postNewBeat, delBeatFromSelectedAct } from '../api/beat';
+import { delSelectedAct, postNewBeat, delBeatFromSelectedAct, editBeat } from '../api/beat';
 
 import Layout from '../../components/layout';
+import BeatForm from '../../components/BeatForm';
 import styles from '../../styles/ViewAct.module.scss';
 
 
 export default function ViewAct() {
   const { selectedAct, selectedActBeats } = useActsStore(
-    (state) => ({selectedAct: state.selectedAct, selectedActBeats: state.selectedActBeats}));
+    (state) => ({
+      selectedAct: state.selectedAct, 
+      // selectedBeat: state.selectedBeat,
+      selectedActBeats: state.selectedActBeats
+    }));
   const updateActsState = useActsStore((state) => state.updateActsState);
   const updateSelectedAct = useActsStore((state) => state.updateSelectedAct);
+  const updateSelectedBeat = useActsStore((state) => state.updateSelectedBeat);
   const updateSelectedActBeats = useActsStore((state) => state.updateSelectedActBeats);
   let showContent = false;
+  // let selectedBeat = {};
 
   console.log('ViewAct - what is selectedAct:', selectedAct);
   console.log('ViewAct - what is selectedActBeats:', selectedActBeats);
@@ -32,6 +39,24 @@ export default function ViewAct() {
   const handleNewBeat = async () => {
     console.log('new beat handler - selectedAct', selectedAct);
     await postNewBeat(updateSelectedActBeats, selectedAct);
+  }
+
+  const handleSelectBeat = (event) => {
+    console.log('edit beat handler - clicked beat', event.currentTarget.parentNode.parentNode.parentNode.classList[0]);
+    const beatId = parseInt(event.currentTarget.parentNode.parentNode.parentNode.classList[0]);
+    console.log(' we getting beatId:', beatId);
+    const selected = selectedActBeats.filter(b => b.id === beatId);
+    console.log(' we getting selected:', selected[0]);
+    updateSelectedBeat(selected[0]);
+    // selectedBeat = selected;
+
+    window.my_modal_1.showModal();
+    // if (selectedBeat === selected) {
+    // } else {
+    //   console.log('hasnt updated yet');
+    // }
+
+    // console.log('is selected beat updated:', selectedBeat);
   }
 
   const handleDelAct = async () => {
@@ -50,6 +75,13 @@ export default function ViewAct() {
     if (selectedActBeats.length === 0) {
       updateSelectedActBeats([]);
     }
+  }
+
+  const handleCloseModal = (event) => {
+    event.preventDefault;
+    window.my_modal_1.close();
+    // selectedBeat = {};
+    // console.log('deslecting beat:', selectedBeat);
   }
 
   const handleShowContent = () => {
@@ -97,8 +129,14 @@ export default function ViewAct() {
                   </span>
                 </div>
                 <div className={styles.beatMetadata}>
-                  <span className={styles.beatName}>{beat.name}</span>
-                  <span className={styles.beatCaption}>"{beat.notes}"</span>
+                  <span className={styles.beatName}>
+                    {beat.name} 
+                    <span className={styles.beatDuration}>{beat.time}</span>
+                    <FontAwesomeIcon onClick={(e) => handleSelectBeat(e)} icon={faPen} />
+                  </span>
+                  <span className={styles.beatCaption}>{beat.cameraAngle}</span>
+                  <span className={styles.beatCaption}>- {beat.notes}</span>
+                  <span className={styles.beatCaption}>"{beat.content}"</span>
                 </div>
               </li>
             ))}
@@ -117,6 +155,10 @@ export default function ViewAct() {
             <Link href="/platform/landing">Back</Link>
           </h2>
         </div>
+
+        <dialog id="my_modal_1" className="modal">
+          <BeatForm handleCloseModal={handleCloseModal} />
+        </dialog>
 
       </section>
     </Layout>
