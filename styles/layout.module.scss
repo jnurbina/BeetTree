@@ -1,5 +1,4 @@
 .container {
-  padding: 3rem 1rem 0;
   overflow: hidden;
 }
 
@@ -11,8 +10,9 @@
   position: fixed;
   top: 0;
   background-color: transparent;
-  z-index: 999;
+  z-index: 10;
   padding-right: 1.825rem;
+  padding-left: 1rem;
 }
 
 .navheader {
@@ -40,4 +40,27 @@
       filter: invert(57%) sepia(72%) saturate(327%) hue-rotate(358deg) brightness(101%) contrast(99%);
     }
   }
+}
+
+.beatDrawer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 20rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-top: 4rem;
+
+  > p {
+    position: absolute;
+    top: 1rem;
+    left: 7rem;
+  }
+}
+
+.beatItem {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
