@@ -15,10 +15,6 @@ export default function Landing() {
   const [scrollDim, setScrollDim] = useState(0);
   
   useEffect(() => {
-    const listElem = document.getElementsByClassName('actlist')[0];
-    const firstItem = listElem.firstChild;
-    const limit = firstItem.offsetLeft;
-
     if (!actsList || !actsList.length) {
       updateActsState();
       // setScrollDim(limit);
